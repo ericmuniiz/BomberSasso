@@ -25,6 +25,9 @@ Sprite.prototype.centroY = function(){
 var tela = document.querySelector("canvas");
 var ctx = tela.getContext("2d");
 
+//fazendo o modal trocar o texto e sair
+
+
 //teclas
 var LEFT=37, UP=38, RIGHT=39, DOWN=40, SPACE=32;
 
