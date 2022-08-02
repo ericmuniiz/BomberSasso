@@ -32,25 +32,32 @@ body {
 	border-color: #C0C0C0;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
+.modal{
+	display: block; 
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.671);
+	width: 100%;
+	height: 100%;
+}
 #modal_2 {
 	position: fixed;
 	top: 50%;
 	margin-top: -250px;
 	left: 30% ;
-	margin-left: -350px;
+	margin-left: -320px;
 
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
 #texto {
 	position: fixed;
 	top: 50%;
 	margin-top: -230px;
 	left: 50% ;
-	margin-left: -250px;
-	height: 280px;
-	width: 550px;
+	margin-left: -220px;
+	height: 270px;
+	width: 560px;
 	border: 4px solid rgba(0, 0, 0, 0.534);
 	border-radius: 15px;
 	background-color: rgb(70, 63, 63);
@@ -60,4 +67,20 @@ body {
 	text-align:center;
 }
 
+#fechar{
+	text-decoration: none;
+	color: rgba(255, 255, 255, 0.945);
+	padding-right: 6px;
+	padding-left: 6px;
+	text-align: right;
+
+}
+#fechar a{
+	background-color: rgb(70, 63, 63);
+	border: 4px solid rgba(0, 0, 0, 0.534);
+	border-radius: 15px;
+}
+#fechar a:hover{
+	background-color: rgba(50, 40, 50);
+}
 
