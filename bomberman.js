@@ -37,18 +37,18 @@ var velocidade = 2;
 //arrays
 var mapa = [
     [4,3,3,3,3,3,3,3,3,3,3,3,3,3,4],
+    [4,0,0,0,0,0,0,0,0,8,9,0,0,0,4],
+    [4,0,5,0,6,0,5,0,5,0,,0,5,0,4],
     [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-    [4,0,0,0,0,0,0,0,0,0,5,0,0,0,4],
-    [4,5,0,0,0,0,0,0,0,0,0,0,0,0,4],
-    [4,0,0,0,0,0,0,0,0,0,0,0,6,0,4],
-    [4,0,0,0,0,0,0,6,0,0,0,0,0,0,4],
-    [4,0,0,0,0,5,0,0,0,0,0,0,0,0,4],
+    [4,0,6,0,5,0,6,0,5,0,6,0,5,0,4],
     [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+    [4,0,5,0,6,0,5,0,6,0,5,0,6,0,4],
     [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-    [4,0,6,0,0,0,0,0,0,0,0,0,0,0,4],
+    [4,0,6,0,5,0,5,0,5,0,5,0,5,0,4],
     [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
-    [4,0,0,0,0,6,0,0,0,0,0,0,0,0,4],
-    [4,0,0,0,0,0,0,0,0,0,0,0,6,0,4],
+    [4,0,5,0,6,0,5,0,6,0,5,0,6,0,4],
+    [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+    [4,0,6,0,5,0,6,0,5,0,6,0,5,0,4],
     [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
     [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]         
 ]
@@ -66,6 +66,11 @@ var paredesNeve = [];
 var paredesSnow = [];
 var paredesGelo = [];
 var paredesGeladas = [];
+var Rodrigo = [];
+var Rodrigos = [];
+var Rodrigo2 = [];
+var Rodrigos2 = [];
+
 for(var linhas in mapa){
     for(var colunas in mapa[linhas]){
         var bloco = mapa[linhas][colunas];
@@ -112,6 +117,18 @@ for(var linhas in mapa){
             y = linhas*50
             var monstroR = new Sprite(x, y, 50, 50, imagemMonstroR)
             monstrosR.push(monstroR);
+        }
+        if(bloco === 8){
+            x = colunas*50
+            y = linhas*50
+            var Rodrigo = new Sprite(x, y, 50, 50, imagemRodrigo)
+            Rodrigos.push(Rodrigo);
+        }
+        if(bloco === 9){
+            x = colunas*50
+            y = linhas*50
+            var Rodrigo2 = new Sprite(x, y, 50, 50, imagemRodrigo2)
+            Rodrigos2.push(Rodrigo2);
         }
 
         
@@ -194,6 +211,13 @@ imagemParedeGelada.src = "https://imgur.com/xsuM7Er.png";
 var imagemMonstroR = new Image();
 imagemMonstroR = ctx.fillRect(xMonstro, yMonstro, 50, 50);
 
+var imagemRodrigo = new Image();
+imagemRodrigo.src = "https://imgur.com/qmrdbf6.png";
+
+var imagemRodrigo2 = new Image();
+imagemRodrigo2.src = "https://imgur.com/95pAjJV.png";
+
+
 
 
 //funções 
@@ -248,6 +272,14 @@ function atualiza(){
         let prd = paredesGeladas[i];
         colisao(boneco, prd);
      }
+     for (let i in Rodrigos) {
+        let prd = Rodrigos[i];
+        colisao(boneco, prd);
+     }
+     for (let i in Rodrigos2) {
+        let prd = Rodrigos2[i];
+        colisao(boneco, prd);
+     }
     
 }
 
@@ -294,6 +326,16 @@ function desenha() {
                 x = colunas*50;
                 y = linhas*50;
                 ctx.drawImage(imagemParedeGelada,x,y,50,50);
+            }
+            if(bloco === 8){
+                x = colunas*50;
+                y = linhas*50;
+                ctx.drawImage(imagemRodrigo,x,y,50,50);
+            }
+            if(bloco === 9){
+                x = colunas*50;
+                y = linhas*50;
+                ctx.drawImage(imagemRodrigo2,x,y,48,48);
             }
         }
     }
