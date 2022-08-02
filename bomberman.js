@@ -26,6 +26,10 @@ var tela = document.querySelector("canvas");
 var ctx = tela.getContext("2d");
 
 //fazendo o modal trocar o texto e sair
+function apagaModal() {
+    document.querySelector(".modal").style.display = "none";
+  };
+
 
 
 //teclas
@@ -201,7 +205,7 @@ function loop (){
     window.requestAnimationFrame(loop,tela);
     atualiza();
     desenha();
-    
+   
     
 }
 
@@ -337,6 +341,10 @@ function pararBomba(){
 }
 
 loop();
+
+//quando clicar no link, puxa a função que fecha o modal
+document.querySelector(".modal a").onclick = apagaModal;
+
 
 //imagemParede.src = "https://imgur.com/EkleLlt.png";
 
