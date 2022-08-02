@@ -68,6 +68,10 @@ body {
 }
 
 #fechar{
+	position: fixed;
+	float: right;
+	top: 50%;
+	left: 60%;
 	text-decoration: none;
 	color: rgba(255, 255, 255, 0.945);
 	padding-right: 6px;

@@ -30,6 +30,10 @@ function apagaModal() {
     document.querySelector(".modal").style.display = "none";
   };
 
+  //variação do texto no modal
+  var mensagem = "oink";
+  document.getElementById("mensagem_porco").innerHTML = mensagem;
+
 
 
 //teclas
@@ -346,6 +350,7 @@ function desenha() {
    
     if(bomba){
         ctx.drawImage(imagemBomba,xBomba,yBomba,50,50);
+        setTimeout(bombaColisao,800);
     }
 }
 
@@ -377,9 +382,47 @@ function colisao(r1,r2){
     }
 
 }
+
+function bombaColisao(){
+    if(xBomba > boneco.x + velocidade){
+        cima = false;
+        baixo = false;
+        esquerda = false;
+        direita = true;
+     }else if(xBomba > boneco.x - velocidade){
+        cima = false;
+        baixo = false;
+        esquerda = true;
+        direita = false;
+     }else if(yBomba > boneco.y + velocidade){
+        cima = true;
+        baixo = false;
+        esquerda = false;
+        direita = false;
+     }else if(yBomba > boneco.y - velocidade){
+        cima = false;
+        baixo = true;
+        esquerda = false;
+        direita = false;
+     }
+
+     if(direita === true){
+        xBomba += velocidade;
+     }else if(esquerda === true){
+        xBomba -= velocidade;
+     }else if(cima === true){
+        yBomba += velocidade;
+     }else if(baixo === true){
+        yBomba -= velocidade;
+     }
+}
 // Função para deixar a variável da bomba false, para ser usada no setTimeOut.
 function pararBomba(){
     bomba = false;
+    cima = false;
+    baixo = false;
+    esquerda = false;
+    direita = false;
 }
 
 loop();
