@@ -41,18 +41,27 @@ if(contaClick === 1){ // se clicar uma vez, troca a mensagem
     document.getElementById("mensagem_porco").innerHTML = mensagem;
 }
 else if(contaClick === 2){
-    document.querySelector(".modal").style.display = "none"; // apaga um display para criar o outro
-    document.querySelector(".modalR").style.display = "block"; // cria o outro display
+    alteraImagem("imagem/rodrigoMonstro.png") // puxou a função com o parâmetro imagem e jogou a imagem achada no link
+
+    //O QUE EU ESTAVA USANDO ANTES
+
+    // document.querySelector(".modal").style.display = "none"; // apaga um display para criar o outro
+    // document.querySelector(".modalR").style.display = "block"; // cria o outro display
 
     mensagem = "Ha Ha Ha Ha Ha, você não é páreo para mim, nunca passará dessa fase"; // mensagem nova
-    document.getElementById("mensagem_rodrigo").innerHTML = mensagem;
+    document.getElementById("mensagem_porco").innerHTML = mensagem;
 }
 if(contaClick === 3){
 
-    document.querySelector(".modalR").style.display = "none" ;  // apaga o display
+    document.querySelector(".modal").style.display = "none" ;  // apaga o display
 
   };
 
+}
+
+//funçao de alterar a imagem do modal
+function alteraImagem (img) { //caminho da imagem 
+document.querySelector("#modal_2").src = img
 }
 
 
@@ -69,7 +78,7 @@ var mapa = [
     [4,0,5,0,6,0,5,0,5,0,,0,5,0,4],
     [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
     [4,0,6,0,5,0,6,0,5,0,6,0,5,0,4],
-    [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+    [4,0,0,8,0,0,0,0,0,0,0,0,0,0,4],
     [4,0,5,0,6,0,5,0,6,0,5,0,6,0,4],
     [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
     [4,0,6,0,5,0,5,0,5,0,5,0,5,0,4],
@@ -94,7 +103,7 @@ var paredesNeve = [];
 var paredesSnow = [];
 var paredesGelo = [];
 var paredesGeladas = [];
-
+var SnowMen = [];
 var Yeti = [];
 var Yeti2 = [];
 
@@ -145,6 +154,12 @@ for(var linhas in mapa){
             y = linhas*50
             var monstroR = new Sprite(x, y, 50, 50, imagemMonstroR)
             monstrosR.push(monstroR);
+        }
+        if(bloco === 8){
+            x = colunas*50
+            y = linhas*50
+            var SnowMan = new Sprite(x, y, 50, 50, imagemSnowMan)
+            SnowMen.push(SnowMan);
         }
 
         if(bloco === 10){
@@ -235,6 +250,9 @@ imagemMonstroR = ctx.fillRect(xMonstro, yMonstro, 50, 50);
 var imagemYeti = new Image();
 imagemYeti.src = "https://imgur.com/MERgtnt.png";
 
+var imagemSnowMan = new Image();
+imagemSnowMan.src = "https://imgur.com/N92aixz.png";
+
 
 
 //funções 
@@ -291,6 +309,10 @@ function atualiza(){
         let prd = Yeti2[i];
         colisao(boneco, prd);
      }
+     for (let i in SnowMen) {
+        let prd = SnowMen[i];
+        colisao(boneco, prd);
+     }
 
 }
 
@@ -337,6 +359,11 @@ function desenha() {
                 x = colunas*50;
                 y = linhas*50;
                 ctx.drawImage(imagemParedeGelada,x,y,50,50);
+            }
+            if(bloco === 8){
+                x = colunas*50;
+                y = linhas*50;
+                ctx.drawImage(imagemSnowMan,x,y,50,50);
             }
 
             if(bloco === 10){
@@ -429,7 +456,7 @@ loop();
 
 //quando clicar no link, puxa a função que fecha o modal
 document.querySelector(".modal a").onclick = apagaModal;
-document.querySelector(".modalR a").onclick = apagaModal;
+// document.querySelector(".modalR a").onclick = apagaModal; // estava usando isso antes
 
 
 //imagemParede.src = "https://imgur.com/EkleLlt.png";
