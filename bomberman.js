@@ -66,7 +66,7 @@ document.querySelector("#modal_2").src = img
 
 
 //teclas
-var LEFT=37, UP=38, RIGHT=39, DOWN=40, SPACE=32;
+var LEFT=37, UP=38, RIGHT=39, DOWN=40, SPACE=32, c = 67;;
 
 //movimento
 var mvLeft = mvUp = mvRight = mvDown = bomba = false;
@@ -194,6 +194,9 @@ window.addEventListener("keydown",function (e){
             yBomba = Math.floor(boneco.centroY()/50)*50;
             this.setTimeout(pararBomba,3000); // usando timeout para fazer a bomba desaparecer.
             break;           
+    }
+    if((key === c) && (bomba === true)){
+        chute = true
     }
     
 }, false)
@@ -377,7 +380,7 @@ function desenha() {
    
     if(bomba){
         ctx.drawImage(imagemBomba,xBomba,yBomba,50,50);
-        setTimeout(bombaColisao,800);
+        bombaColisao();
     }
 }
 
@@ -410,46 +413,53 @@ function colisao(r1,r2){
 
 }
 
+var direita = false;
+var esquerda = false;
+var cima = false;
+var baixo = false;
+var chute = false
+
 function bombaColisao(){
-    if(xBomba > boneco.x + velocidade){
+    if((xBomba > boneco.x + velocidade) && (chute === true) && (cima === false) && (baixo === false) && (esquerda === false)){
         cima = false;
         baixo = false;
         esquerda = false;
         direita = true;
-     }else if(xBomba > boneco.x - velocidade){
+     }else if((xBomba > boneco.x - velocidade) && (chute === true) && (direita === false) && (baixo === false) && (cima === false)){
         cima = false;
         baixo = false;
         esquerda = true;
         direita = false;
-     }else if(yBomba > boneco.y + velocidade){
+     }else if((yBomba > boneco.y + velocidade) && (chute === true) && (baixo === false) && (direita === false) && (esquerda === false)){
         cima = true;
         baixo = false;
         esquerda = false;
         direita = false;
-     }else if(yBomba > boneco.y - velocidade){
+     }else if((yBomba > boneco.y - velocidade) && (chute === true) && (cima === false) && (direita === false) && (esquerda === false)){
         cima = false;
         baixo = true;
         esquerda = false;
         direita = false;
      }
 
-     if(direita === true){
+     if((direita === true) && (xBomba < 650)){
         xBomba += velocidade;
-     }else if(esquerda === true){
+     }else if((esquerda === true) && (xBomba > 50)){
         xBomba -= velocidade;
-     }else if(cima === true){
+     }else if((cima === true) && (yBomba < 650)){
         yBomba += velocidade;
-     }else if(baixo === true){
+     }else if((baixo === true) && (yBomba > 50)){
         yBomba -= velocidade;
      }
 }
 // Função para deixar a variável da bomba false, para ser usada no setTimeOut.
 function pararBomba(){
     bomba = false;
+    direita = false;
+    esquerda = false;
     cima = false;
     baixo = false;
-    esquerda = false;
-    direita = false;
+    chute = false
 }
 
 loop();
