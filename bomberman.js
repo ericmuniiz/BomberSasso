@@ -25,15 +25,35 @@ Sprite.prototype.centroY = function(){
 var tela = document.querySelector("canvas");
 var ctx = tela.getContext("2d");
 
+
+
+//variação do texto no modal
+var mensagem = "Oink Oink, chegamos juntos até a última fase, você é bom mesmo! Essa última fase será a mais desafiadora, oink oink";  
+document.getElementById("mensagem_porco").innerHTML = mensagem;
+
 //fazendo o modal trocar o texto e sair
+var contaClick = 0; //variável para contar as vezes que ele clica para passar e conseguir manipular o bloco e a mensagem
+
 function apagaModal() {
-    document.querySelector(".modal").style.display = "none";
+contaClick += 1;
+if(contaClick === 1){ // se clicar uma vez, troca a mensagem
+    mensagem = "Vamos agora lutar com o mestre rodrigo, precisamos vencer essa! PERFEITO? OINK OINK";
+    document.getElementById("mensagem_porco").innerHTML = mensagem;
+}
+else if(contaClick === 2){
+    document.querySelector(".modal").style.display = "none"; // apaga um display para criar o outro
+    document.querySelector(".modalR").style.display = "block"; // cria o outro display
+
+    mensagem = "Ha Ha Ha Ha Ha, você não é páreo para mim, nunca passará dessa fase"; // mensagem nova
+    document.getElementById("mensagem_rodrigo").innerHTML = mensagem;
+}
+if(contaClick === 3){
+
+    document.querySelector(".modalR").style.display = "none" ;  // apaga o display
+
   };
 
-  //variação do texto no modal
-  var mensagem = "oink";
-  document.getElementById("mensagem_porco").innerHTML = mensagem;
-
+}
 
 
 //teclas
@@ -45,7 +65,7 @@ var velocidade = 2;
 //arrays
 var mapa = [
     [4,3,3,3,3,3,3,3,3,3,3,3,3,3,4],
-    [4,0,0,0,0,0,0,0,0,8,9,0,0,0,4],
+    [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
     [4,0,5,0,6,0,5,0,5,0,,0,5,0,4],
     [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
     [4,0,6,0,5,0,6,0,5,0,6,0,5,0,4],
@@ -74,10 +94,7 @@ var paredesNeve = [];
 var paredesSnow = [];
 var paredesGelo = [];
 var paredesGeladas = [];
-var Rodrigo = [];
-var Rodrigos = [];
-var Rodrigo2 = [];
-var Rodrigos2 = [];
+
 
 for(var linhas in mapa){
     for(var colunas in mapa[linhas]){
@@ -126,21 +143,6 @@ for(var linhas in mapa){
             var monstroR = new Sprite(x, y, 50, 50, imagemMonstroR)
             monstrosR.push(monstroR);
         }
-        if(bloco === 8){
-            x = colunas*50
-            y = linhas*50
-            var Rodrigo = new Sprite(x, y, 50, 50, imagemRodrigo)
-            Rodrigos.push(Rodrigo);
-        }
-        if(bloco === 9){
-            x = colunas*50
-            y = linhas*50
-            var Rodrigo2 = new Sprite(x, y, 50, 50, imagemRodrigo2)
-            Rodrigos2.push(Rodrigo2);
-        }
-
-        
-        
         
     }  
 } 
@@ -219,13 +221,6 @@ imagemParedeGelada.src = "https://imgur.com/xsuM7Er.png";
 var imagemMonstroR = new Image();
 imagemMonstroR = ctx.fillRect(xMonstro, yMonstro, 50, 50);
 
-var imagemRodrigo = new Image();
-imagemRodrigo.src = "https://imgur.com/qmrdbf6.png";
-
-var imagemRodrigo2 = new Image();
-imagemRodrigo2.src = "https://imgur.com/95pAjJV.png";
-
-
 
 
 //funções 
@@ -251,9 +246,6 @@ function atualiza(){
         boneco.y += velocidade;
     }
 
-  
-    //movimentação do monstro
-    var horizontal = Math.round(Math.random());
 
     //colisões
     for(let i in paredes){
@@ -278,14 +270,6 @@ function atualiza(){
      }
      for (let i in paredesGeladas) {
         let prd = paredesGeladas[i];
-        colisao(boneco, prd);
-     }
-     for (let i in Rodrigos) {
-        let prd = Rodrigos[i];
-        colisao(boneco, prd);
-     }
-     for (let i in Rodrigos2) {
-        let prd = Rodrigos2[i];
         colisao(boneco, prd);
      }
     
@@ -335,16 +319,7 @@ function desenha() {
                 y = linhas*50;
                 ctx.drawImage(imagemParedeGelada,x,y,50,50);
             }
-            if(bloco === 8){
-                x = colunas*50;
-                y = linhas*50;
-                ctx.drawImage(imagemRodrigo,x,y,50,50);
-            }
-            if(bloco === 9){
-                x = colunas*50;
-                y = linhas*50;
-                ctx.drawImage(imagemRodrigo2,x,y,48,48);
-            }
+            
         }
     }
    
@@ -429,6 +404,7 @@ loop();
 
 //quando clicar no link, puxa a função que fecha o modal
 document.querySelector(".modal a").onclick = apagaModal;
+document.querySelector(".modalR a").onclick = apagaModal;
 
 
 //imagemParede.src = "https://imgur.com/EkleLlt.png";
