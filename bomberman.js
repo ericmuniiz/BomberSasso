@@ -77,7 +77,7 @@ var mapa = [
     [4,0,5,0,6,0,5,0,6,0,5,0,6,0,4],
     [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
     [4,0,6,0,5,0,6,0,5,0,6,0,5,0,4],
-    [4,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+    [4,0,0,0,0,0,0,0,0,0,0,0,10,0,4],
     [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]         
 ]
 var x;
@@ -94,6 +94,9 @@ var paredesNeve = [];
 var paredesSnow = [];
 var paredesGelo = [];
 var paredesGeladas = [];
+
+var Yeti = [];
+var Yeti2 = [];
 
 
 for(var linhas in mapa){
@@ -143,6 +146,14 @@ for(var linhas in mapa){
             var monstroR = new Sprite(x, y, 50, 50, imagemMonstroR)
             monstrosR.push(monstroR);
         }
+
+        if(bloco === 10){
+            x = colunas*50
+            y = linhas*50
+            var Yeti = new Sprite(x, y, 50, 50, imagemYeti)
+            Yeti2.push(Yeti);
+        }
+        
         
     }  
 } 
@@ -221,6 +232,9 @@ imagemParedeGelada.src = "https://imgur.com/xsuM7Er.png";
 var imagemMonstroR = new Image();
 imagemMonstroR = ctx.fillRect(xMonstro, yMonstro, 50, 50);
 
+var imagemYeti = new Image();
+imagemYeti.src = "https://imgur.com/MERgtnt.png";
+
 
 
 //funções 
@@ -272,7 +286,12 @@ function atualiza(){
         let prd = paredesGeladas[i];
         colisao(boneco, prd);
      }
-    
+
+     for (let i in Yeti2) {
+        let prd = Yeti2[i];
+        colisao(boneco, prd);
+     }
+
 }
 
 
@@ -319,7 +338,13 @@ function desenha() {
                 y = linhas*50;
                 ctx.drawImage(imagemParedeGelada,x,y,50,50);
             }
-            
+
+            if(bloco === 10){
+                x = colunas*50;
+                y = linhas*50;
+                ctx.drawImage(imagemYeti,x,y,50,50);
+            }
+
         }
     }
    
